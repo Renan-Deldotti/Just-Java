@@ -57,7 +57,7 @@
         android:paddingEnd="16dp"
         android:paddingRight="16dp"
         android:text="@string/price"
-        app:layout_constraintTop_toBottomOf="@id/quantity_text_view" />
+        app:layout_constraintTop_toBottomOf="@id/cupButtons" />
 
     <TextView
         android:id="@+id/price_text_view"
@@ -70,5 +70,28 @@
         android:paddingRight="16dp"
         android:text="$0.00"
         app:layout_constraintTop_toBottomOf="@id/TextViewTwo" />
+    <RadioGroup
+        android:id="@+id/cupButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="8dp"
+        android:paddingStart="8dp"
+        android:paddingTop="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/quantity_text_view">
+        <RadioButton
+            android:id="@+id/radioBtOne"
+            android:checked="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="I need a new cup" />
+        <RadioButton
+            android:id="@+id/radioBtTwo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="I got a paper cup" />
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
