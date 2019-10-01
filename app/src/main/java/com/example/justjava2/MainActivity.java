@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.NumberFormat;
 
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     public void submitOrder(View view) {
         int qntOfCoffee;
         double coffeePrice = 5.25;
+        String textToShow;
         RadioGroup cupBtn = (RadioGroup) findViewById(R.id.cupButtons);
         //int selectRadio = cupBtn.getCheckedRadioButtonId();
         //RadioButton selectedRadBtn = (RadioButton) findViewById(selectRadio);
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             quantityTextView.setText(0);
             qntOfCoffee = 0;
+            textToShow = "Something went wrong, sorry\nTry again.";
         }
         String radioBtnIdText = selectedRadBtn.getText().toString();
         if (radioBtnIdText.equals("I need a new cup")) {
@@ -39,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
             coffeePrice = 3.00;
             displayPrice(qntOfCoffee * coffeePrice);
         }
+        textToShow = "Your ordered is being prepared :D\n\tThank you.";
+        Toast.makeText(this, textToShow, Toast.LENGTH_LONG).show();
     }
 
     private int valNumCoffee(TextView textView) {
