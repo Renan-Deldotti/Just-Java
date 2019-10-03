@@ -28,11 +28,11 @@ public class MainActivity extends AppCompatActivity {
                 showSummary(true, qntOfCoffee,coffeePrice);
             }else {
                 showSummary(false,0,0);
-                textToShow = "Try again.";
+                textToShow = "Error";
             }
         }else {
             showSummary(false,0,0);
-            textToShow = "Try again.";
+            textToShow = "Error";
         }
         Toast.makeText(this, textToShow, Toast.LENGTH_LONG).show();
     }
