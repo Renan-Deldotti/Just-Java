@@ -25,28 +25,31 @@ public class MainActivity extends AppCompatActivity {
         if (qntOfCoffee != 0) {
             if (coffeePrice != 0) {
                 textToShow = "Your ordered is being prepared :D\n\tThank you.";
-                showSummary(true, qntOfCoffee,coffeePrice);
-            }else {
-                showSummary(false,0,0);
+                showSummary(true, qntOfCoffee, coffeePrice);
+            } else {
+                showSummary(false, 0, 0);
                 textToShow = "Try Again";
             }
-        }else {
-            showSummary(false,0,0);
+        } else if (qntOfCoffee == 0) {
+            showSummary(false, 0, 0);
+            textToShow = "Your cart is empty.";
+        } else {
+            showSummary(false, 0, 0);
             textToShow = "Try again.";
         }
         Toast.makeText(this, textToShow, Toast.LENGTH_LONG).show();
     }
 
-    private void showSummary(boolean b, int i,double d) {
+    private void showSummary(boolean b, int i, double d) {
         TextView summaryTextView = findViewById(R.id.summaryTextView);
         String textToShow = "";
-        if(b) {
+        if (b) {
             textToShow =
-                "Name: Username Here"
-                + "\nQuantity: " + i
-                + "\nTotal: " + NumberFormat.getCurrencyInstance().format(i * d);
+                    "Name: Username Here"
+                            + "\nQuantity: " + i
+                            + "\nTotal: " + NumberFormat.getCurrencyInstance().format(i * d);
             summaryTextView.setText(textToShow);
-        }else{
+        } else {
             summaryTextView.setText(textToShow);
         }
     }
@@ -56,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         if (Integer.parseInt(quantityTextView.getText().toString().trim()) >= 0) {
             return Integer.parseInt(quantityTextView.getText().toString().trim());
         }
-        return 0;
+        return -1;
     }
 
     private short checkCup() {
@@ -79,19 +82,6 @@ public class MainActivity extends AppCompatActivity {
         return price;
     }
 
-    private int valNumCoffee(TextView textView) {
-        int i = Integer.parseInt(textView.getText().toString().trim());
-        if (i < 0) {
-            return -1;
-        } else if (i == 0) {
-            return 0;
-        } else if (i > 0) {
-            return 1;
-        } else {
-            return -1;
-        }
-    }
-
     private void displayPrice() {
         TextView priceTxtView = findViewById(R.id.price_text_view);
         int qntOfCoffee = checkQntView();
@@ -106,10 +96,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void increaseQuantity(View view) {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
-        if (valNumCoffee(quantityTextView) == 0 || valNumCoffee(quantityTextView) == 1) {
-            int qntOfCoffee = Integer.parseInt(quantityTextView.getText().toString().trim());
-            qntOfCoffee++;
-            quantityTextView.setText("" + qntOfCoffee);
+        if (checkQntView() != -1) {
+            quantityTextView.setText(String.valueOf(checkQntView() + 1));
         } else {
             quantityTextView.setText("0");
         }
@@ -118,10 +106,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void decreaseQuantity(View view) {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
-        if (valNumCoffee(quantityTextView) == 1) {
-            int qntOfCoffee = Integer.parseInt(quantityTextView.getText().toString().trim());
-            qntOfCoffee--;
-            quantityTextView.setText("" + qntOfCoffee);
+        if (checkQntView() != -1 && checkQntView() > 0) {
+            quantityTextView.setText(String.valueOf(checkQntView() - 1));
         } else {
             quantityTextView.setText("0");
         }
