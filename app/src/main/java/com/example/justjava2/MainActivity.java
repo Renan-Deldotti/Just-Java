@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         int qntOfCoffee = checkQntView();
         double coffeePrice = getCoffeePrice(checkCup());
         String textToShow;
-        ArrayList<String> adt = new ArrayList<String>();
+        ArrayList<String> adt = new ArrayList<>();
         if (qntOfCoffee != 0) {
             if (coffeePrice != 0) {
                 adt = checkAdditional();
