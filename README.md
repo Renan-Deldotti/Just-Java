@@ -1,4 +1,3 @@
 # Just-Java
-<h4>Udacity UD837 Android Course App - Just Java</h4>
-<hr><p>App made from the tutorial.</p>
-<p>This app receives a number of coffees and generate an order based on the number of coffee plus the price per cup.</p>
+<h4>Udacity Android Course</h4>
+<hr><p>Udacity UD837 Android Course App - Just Java</p>
