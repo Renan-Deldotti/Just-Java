@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
                             + "\nQuantity: " + i
                             + "\nTotal: " + NumberFormat.getCurrencyInstance().format(i * d);
             summaryTextView.setText(textToShow);
+            summaryTextView.setVisibility(View.VISIBLE);
         } else {
             summaryTextView.setText(textToShow);
         }
