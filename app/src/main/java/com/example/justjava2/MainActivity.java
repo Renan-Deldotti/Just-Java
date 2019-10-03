@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,37 +24,54 @@ public class MainActivity extends AppCompatActivity {
         int qntOfCoffee = checkQntView();
         double coffeePrice = getCoffeePrice(checkCup());
         String textToShow;
+        ArrayList<String> adt = new ArrayList<String>();
         if (qntOfCoffee != 0) {
             if (coffeePrice != 0) {
+                adt = checkAdditional();
                 textToShow = "Your ordered is being prepared :D\n\tThank you.";
-                showSummary(true, qntOfCoffee, coffeePrice);
+                showSummary(adt,true, qntOfCoffee, coffeePrice);
             } else {
-                showSummary(false, 0, 0);
+                showSummary(adt,false, 0, 0);
                 textToShow = "Try Again";
             }
         } else if (qntOfCoffee == 0) {
-            showSummary(false, 0, 0);
+            showSummary(adt,false, 0, 0);
             textToShow = "Your cart is empty.";
         } else {
-            showSummary(false, 0, 0);
+            showSummary(adt,false, 0, 0);
             textToShow = "Try again.";
         }
         Toast.makeText(this, textToShow, Toast.LENGTH_LONG).show();
     }
 
-    private void showSummary(boolean b, int i, double d) {
+    private ArrayList<String> checkAdditional() {
+        ArrayList<String> adts = new ArrayList<String>();
+        CheckBox adt = findViewById(R.id.whippedCream);
+        if (adt.isChecked())
+            adts.add("Whipped cream");
+        adt = findViewById(R.id.chocolate);
+        if (adt.isChecked())
+            adts.add("Chocolate");
+        return adts;
+    }
+
+    private void showSummary(ArrayList<String> adt, boolean b, int i, double d) {
         TextView summaryTextView = findViewById(R.id.summaryTextView);
         String textToShow = "";
         if (b) {
-            textToShow =
-                    "Name: Username Here"
-                            + "\nQuantity: " + i
-                            + "\nTotal: " + NumberFormat.getCurrencyInstance().format(i * d);
-            summaryTextView.setText(textToShow);
-            summaryTextView.setVisibility(View.VISIBLE);
-        } else {
+            textToShow = "Name: Username Here" + "\nQuantity: " + i;
+            if(adt.size() > 0) {
+                textToShow += "\nAditionals:";
+                for (String adtional : adt) {
+                    textToShow += "\n\t" + adtional;
+                }
+            }
+            textToShow += "\nTotal: " + NumberFormat.getCurrencyInstance().format(i * d);
+        }else {
             summaryTextView.setText(textToShow);
         }
+        summaryTextView.setText(textToShow);
+        summaryTextView.setVisibility(View.VISIBLE);
     }
 
     private int checkQntView() {
@@ -96,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void increaseQuantity(View view) {
-        TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
+        TextView quantityTextView = findViewById(R.id.quantity_text_view);
         if (checkQntView() != -1) {
             quantityTextView.setText(String.valueOf(checkQntView() + 1));
         } else {
@@ -106,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void decreaseQuantity(View view) {
-        TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
+        TextView quantityTextView = findViewById(R.id.quantity_text_view);
         if (checkQntView() != -1 && checkQntView() > 0) {
             quantityTextView.setText(String.valueOf(checkQntView() - 1));
         } else {

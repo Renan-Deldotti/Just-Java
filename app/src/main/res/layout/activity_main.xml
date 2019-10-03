@@ -1,143 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/ButtonOne"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:onClick="submitOrder"
-        android:text="@string/order"
-        android:textAllCaps="true"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/price_text_view" />
-
-    <Button
-        android:id="@+id/minusButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:onClick="decreaseQuantity"
-        android:text="-"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/TextViewOne" />
-
-    <Button
-        android:id="@+id/plusButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:onClick="increaseQuantity"
-        android:text="+"
-        app:layout_constraintStart_toEndOf="@id/quantity_text_view"
-        app:layout_constraintTop_toBottomOf="@id/TextViewOne" />
-
-    <RadioGroup
-        android:id="@+id/cupButtons"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingStart="8dp"
-        android:paddingLeft="8dp"
-        android:paddingTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/plusButton">
+        android:layout_height="match_parent">
 
-        <RadioButton
-            android:id="@+id/radioBtOne"
+        <Button
+            android:id="@+id/ButtonOne"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="displayPrice"
-            android:layout_weight="1"
-            android:checked="true"
-            android:text="I need a new cup" />
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:onClick="submitOrder"
+            android:text="@string/order"
+            android:textAllCaps="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/price_text_view" />
 
-        <RadioButton
-            android:id="@+id/radioBtTwo"
+        <Button
+            android:id="@+id/minusButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:onClick="decreaseQuantity"
+            android:text="-"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/TextViewOne" />
+
+        <Button
+            android:id="@+id/plusButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:onClick="increaseQuantity"
+            android:text="+"
+            app:layout_constraintStart_toEndOf="@id/quantity_text_view"
+            app:layout_constraintTop_toBottomOf="@id/TextViewOne" />
+
+        <RadioGroup
+            android:id="@+id/cupButtons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/whippedCream">
+
+            <RadioButton
+                android:id="@+id/radioBtOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:onClick="displayPrice"
+                android:text="I need a new cup" />
+
+            <RadioButton
+                android:id="@+id/radioBtTwo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="displayPrice"
+                android:text="I got a paper cup" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="displayPrice"
-            android:layout_weight="1"
-            android:text="I got a paper cup" />
-    </RadioGroup>
+            android:padding="8dp"
+            android:text="Toppings - Additions"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/minusButton" />
 
-    <TextView
-        android:id="@+id/TextViewOne"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:paddingLeft="16dp"
-        android:paddingTop="16dp"
-        android:paddingEnd="16dp"
-        android:paddingRight="8dp"
-        android:text="@string/quantity"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <CheckBox
+            android:id="@+id/whippedCream"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:text="Whipped cream"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/chocolate"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView" />
 
-    <TextView
-        android:id="@+id/TextViewTwo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:paddingLeft="16dp"
-        android:paddingTop="16dp"
-        android:paddingEnd="16dp"
-        android:paddingRight="16dp"
-        android:text="@string/price"
-        app:layout_constraintTop_toBottomOf="@id/cupButtons" />
+        <TextView
+            android:id="@+id/TextViewOne"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingLeft="16dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="16dp"
+            android:paddingRight="8dp"
+            android:text="@string/quantity"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/price_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:paddingLeft="16dp"
-        android:paddingTop="16dp"
-        android:paddingEnd="16dp"
-        android:paddingRight="16dp"
-        android:text="R$ 0.00"
-        app:layout_constraintTop_toBottomOf="@id/TextViewTwo" />
+        <TextView
+            android:id="@+id/TextViewTwo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingLeft="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingRight="16dp"
+            android:text="@string/price"
+            app:layout_constraintTop_toBottomOf="@id/cupButtons" />
 
-    <TextView
-        android:id="@+id/quantity_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="8dp"
-        android:paddingLeft="8dp"
-        android:paddingTop="16dp"
-        android:paddingEnd="8dp"
-        android:paddingRight="8dp"
-        android:text="0"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@id/minusButton"
-        app:layout_constraintTop_toBottomOf="@id/TextViewOne" />
+        <TextView
+            android:id="@+id/price_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingLeft="16dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="16dp"
+            android:paddingRight="16dp"
+            android:text="R$ 0.00"
+            app:layout_constraintTop_toBottomOf="@id/TextViewTwo" />
 
-    <TextView
-        android:id="@+id/TextViewS"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Summary"
-        android:paddingTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ButtonOne" />
+        <TextView
+            android:id="@+id/quantity_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingStart="8dp"
+            android:paddingLeft="8dp"
+            android:paddingEnd="8dp"
+            android:paddingRight="8dp"
+            android:text="0"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/minusButton"
+            app:layout_constraintEnd_toStartOf="@id/plusButton"
+            app:layout_constraintStart_toEndOf="@id/minusButton"
+            app:layout_constraintTop_toBottomOf="@id/TextViewOne" />
 
-    <TextView
-        android:id="@+id/summaryTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Empty"
-        android:visibility="invisible"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextViewS" />
+        <TextView
+            android:id="@+id/TextViewS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:text="Summary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ButtonOne" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/summaryTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Empty"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TextViewS" />
+
+        <View
+            android:id="@+id/teste1"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_marginTop="50dp"
+            android:background="@android:color/black"
+            app:layout_constraintTop_toBottomOf="@id/summaryTextView" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_marginTop="50dp"
+            android:background="@android:color/holo_orange_light"
+            app:layout_constraintTop_toBottomOf="@id/teste1" />
+
+        <CheckBox
+            android:id="@+id/chocolate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:text="Chocolate"
+            app:layout_constraintBottom_toBottomOf="@+id/whippedCream"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/whippedCream"
+            app:layout_constraintTop_toTopOf="@+id/whippedCream" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
