@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,30 +19,64 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void submitOrder(View view) {
-        int qntOfCoffee;
-        double coffeePrice = 5.25;
+        int qntOfCoffee = checkQntView();
+        double coffeePrice = getCoffeePrice(checkCup());
         String textToShow;
-        RadioGroup cupBtn = (RadioGroup) findViewById(R.id.cupButtons);
-        //int selectRadio = cupBtn.getCheckedRadioButtonId();
-        //RadioButton selectedRadBtn = (RadioButton) findViewById(selectRadio);
-        RadioButton selectedRadBtn = (RadioButton) findViewById(cupBtn.getCheckedRadioButtonId());
-        TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
-        if (valNumCoffee(quantityTextView) == 0 || valNumCoffee(quantityTextView) == 1) {
-            qntOfCoffee = Integer.parseInt(quantityTextView.getText().toString().trim());
-        } else {
-            quantityTextView.setText(0);
-            qntOfCoffee = 0;
-            textToShow = "Something went wrong, sorry\nTry again.";
+        if (qntOfCoffee != 0) {
+            if (coffeePrice != 0) {
+                textToShow = "Your ordered is being prepared :D\n\tThank you.";
+                showSummary(true, qntOfCoffee,coffeePrice);
+            }else {
+                showSummary(false,0,0);
+                textToShow = "Try again.";
+            }
+        }else {
+            showSummary(false,0,0);
+            textToShow = "Try again.";
         }
-        String radioBtnIdText = selectedRadBtn.getText().toString();
-        if (radioBtnIdText.equals("I need a new cup")) {
-            displayPrice(qntOfCoffee * coffeePrice);
-        } else if (radioBtnIdText.equals("I got a paper cup")) {
-            coffeePrice = 3.00;
-            displayPrice(qntOfCoffee * coffeePrice);
-        }
-        textToShow = "Your ordered is being prepared :D\n\tThank you.";
         Toast.makeText(this, textToShow, Toast.LENGTH_LONG).show();
+    }
+
+    private void showSummary(boolean b, int i,double d) {
+        TextView summaryTextView = findViewById(R.id.summaryTextView);
+        String textToShow = "";
+        if(b) {
+            textToShow =
+                "Name: Username Here"
+                + "\nQuantity: " + i
+                + "\nTotal: " + NumberFormat.getCurrencyInstance().format(i * d);
+            summaryTextView.setText(textToShow);
+        }else{
+            summaryTextView.setText(textToShow);
+        }
+    }
+
+    private int checkQntView() {
+        TextView quantityTextView = findViewById(R.id.quantity_text_view);
+        if (Integer.parseInt(quantityTextView.getText().toString().trim()) >= 0) {
+            return Integer.parseInt(quantityTextView.getText().toString().trim());
+        }
+        return 0;
+    }
+
+    private short checkCup() {
+        RadioGroup cupBtn = findViewById(R.id.cupButtons);
+        switch (cupBtn.getCheckedRadioButtonId()) {
+            case R.id.radioBtOne:
+                return 1;
+            case R.id.radioBtTwo:
+                return 2;
+            default:
+                return 0;
+        }
+    }
+
+    private double getCoffeePrice(short s) {
+        double price;
+        if (s == 1) price = 5.00;
+        else if (s == 2) price = 3.50;
+        else price = 0;
+        return price;
     }
 
     private int valNumCoffee(TextView textView) {
@@ -59,9 +92,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void displayPrice(double i) {
+    private void displayPrice() {
         TextView priceTxtView = findViewById(R.id.price_text_view);
-        priceTxtView.setText(NumberFormat.getCurrencyInstance().format(i));
+        int qntOfCoffee = checkQntView();
+        double coffeePrice = getCoffeePrice(checkCup());
+        String textToShow = NumberFormat.getCurrencyInstance().format(qntOfCoffee * coffeePrice);
+        priceTxtView.setText(textToShow);
+    }
+
+    public void displayPrice(View view) {
+        displayPrice();
     }
 
     public void increaseQuantity(View view) {
@@ -73,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             quantityTextView.setText("0");
         }
+        displayPrice();
     }
 
     public void decreaseQuantity(View view) {
@@ -84,5 +125,6 @@ public class MainActivity extends AppCompatActivity {
         } else {
             quantityTextView.setText("0");
         }
+        displayPrice();
     }
 }
