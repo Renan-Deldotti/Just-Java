@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Just Java 2</string>
+    <string name="order">Pedir</string>
+    <string name="price">Valor</string>
+    <string name="quantity">Quantidade</string>
+    <string name="minus">-</string>
+    <string name="plus">+</string>
+    <string name="toppings">Coberturas - Adicionar</string>
+    <string name="paperCup">Copo de papel</string>
+    <string name="newCup">Copo normal</string>
+    <string name="countryCurrency">R$ 0,00</string>
+    <string name="whippedCream">Cobertura de chantily</string>
+    <string name="chocolate">Chocolate</string>
+    <string name="empty">Vazio</string>
+    <string name="nameHint">Nome</string>
+    <string name="quantityNumber">0</string>
+    <string name="summary">Resumo do pedido</string>
+</resources>

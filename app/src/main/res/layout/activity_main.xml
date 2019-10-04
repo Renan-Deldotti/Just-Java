@@ -9,7 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <Button
             android:id="@+id/ButtonOne"
@@ -31,7 +31,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:onClick="decreaseQuantity"
-            android:text="-"
+            android:text="@string/minus"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/TextViewOne" />
 
@@ -40,7 +40,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:onClick="increaseQuantity"
-            android:text="+"
+            android:text="@string/plus"
             app:layout_constraintStart_toEndOf="@id/quantity_text_view"
             app:layout_constraintTop_toBottomOf="@id/TextViewOne" />
 
@@ -60,7 +60,7 @@
                 android:layout_weight="1"
                 android:checked="true"
                 android:onClick="displayPrice"
-                android:text="I need a new cup" />
+                android:text="@string/newCup" />
 
             <RadioButton
                 android:id="@+id/radioBtTwo"
@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="displayPrice"
-                android:text="I got a paper cup" />
+                android:text="@string/paperCup" />
         </RadioGroup>
 
         <TextView
@@ -76,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"
-            android:text="Toppings - Additions"
+            android:text="@string/toppings"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/minusButton" />
 
@@ -85,8 +85,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="16dp"
+            android:paddingRight="1dp"
+            android:paddingEnd="1dp"
+            android:paddingStart="16dp"
             android:onClick="displayPrice"
-            android:text="Whipped cream"
+            android:text="@string/whippedCream"
             android:textSize="16sp"
             app:layout_constraintEnd_toStartOf="@+id/chocolate"
             app:layout_constraintHorizontal_bias="0.5"
@@ -127,7 +130,7 @@
             android:paddingTop="16dp"
             android:paddingEnd="16dp"
             android:paddingRight="16dp"
-            android:text="R$ 0.00"
+            android:text="@string/countryCurrency"
             app:layout_constraintTop_toBottomOf="@id/TextViewTwo" />
 
         <TextView
@@ -139,7 +142,7 @@
             android:paddingLeft="8dp"
             android:paddingEnd="8dp"
             android:paddingRight="8dp"
-            android:text="0"
+            android:text="@string/quantityNumber"
             android:textColor="@android:color/black"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@id/minusButton"
@@ -152,7 +155,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="8dp"
-            android:text="Summary"
+            android:text="@string/summary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ButtonOne" />
@@ -162,7 +165,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Empty"
+            android:text="@string/empty"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -174,7 +177,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="16dp"
             android:onClick="displayPrice"
-            android:text="Chocolate"
+            android:text="@string/chocolate"
             app:layout_constraintBottom_toBottomOf="@+id/whippedCream"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -186,7 +189,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:hint="Name"
+            android:hint="@string/nameHint"
             android:imeOptions="actionSend"
             android:inputType="textCapWords|textNoSuggestions|textFilter"
             app:layout_constraintLeft_toLeftOf="parent"
