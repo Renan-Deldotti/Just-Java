@@ -85,6 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="16dp"
+            android:onClick="displayPrice"
             android:text="Whipped cream"
             android:textSize="16sp"
             app:layout_constraintEnd_toStartOf="@+id/chocolate"
@@ -167,26 +168,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TextViewS" />
 
-        <View
-            android:id="@+id/teste1"
-            android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:layout_marginTop="50dp"
-            android:background="@android:color/black"
-            app:layout_constraintTop_toBottomOf="@id/summaryTextView" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:layout_marginTop="50dp"
-            android:background="@android:color/holo_orange_light"
-            app:layout_constraintTop_toBottomOf="@id/teste1" />
-
         <CheckBox
             android:id="@+id/chocolate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="16dp"
+            android:onClick="displayPrice"
             android:text="Chocolate"
             app:layout_constraintBottom_toBottomOf="@+id/whippedCream"
             app:layout_constraintEnd_toEndOf="parent"

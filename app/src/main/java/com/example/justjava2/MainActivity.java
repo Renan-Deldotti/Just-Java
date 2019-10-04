@@ -28,6 +28,11 @@ public class MainActivity extends AppCompatActivity {
         EditText mEditText = findViewById(R.id.usernameTextView);
         mEditText.setFilters(new InputFilter[]{getEditTextFilter()});
     }
+
+    /**
+     * Cria um filtro para receber apenas letras pelo textfield.
+     * @return retorna a string formatada.
+     */
     public static InputFilter getEditTextFilter() {
         return new InputFilter() {
 
@@ -68,28 +73,34 @@ public class MainActivity extends AppCompatActivity {
         int qntOfCoffee = checkQntView();
         double coffeePrice = getCoffeePrice(checkCup());
         String textToShow;
+        String username = checkForUsername();
         ArrayList<String> adt = new ArrayList<>();
         if (qntOfCoffee != 0) {
             if (coffeePrice != 0) {
                 adt = checkAdditional();
                 textToShow = "Your ordered is being prepared :D\n\tThank you.";
-                showSummary(adt,true, qntOfCoffee, coffeePrice);
+                showSummary(username,adt,true, qntOfCoffee, coffeePrice);
             } else {
-                showSummary(adt,false, 0, 0);
+                showSummary("",adt,false, 0, 0);
                 textToShow = "Try Again";
             }
         } else if (qntOfCoffee == 0) {
-            showSummary(adt,false, 0, 0);
+            showSummary("",adt,false, 0, 0);
             textToShow = "Your cart is empty.";
         } else {
-            showSummary(adt,false, 0, 0);
+            showSummary("",adt,false, 0, 0);
             textToShow = "Try again.";
         }
         Toast.makeText(this, textToShow, Toast.LENGTH_LONG).show();
     }
 
+    private String checkForUsername() {
+        EditText usernameTxtView = findViewById(R.id.usernameTextView);
+        return usernameTxtView.getText().toString();
+    }
+
     private ArrayList<String> checkAdditional() {
-        ArrayList<String> adts = new ArrayList<String>();
+        ArrayList<String> adts = new ArrayList<>();
         CheckBox adt = findViewById(R.id.whippedCream);
         if (adt.isChecked())
             adts.add("Whipped cream");
@@ -99,18 +110,29 @@ public class MainActivity extends AppCompatActivity {
         return adts;
     }
 
-    private void showSummary(ArrayList<String> adt, boolean b, int i, double d) {
+    /**
+     * Cria o summario e insere o valor na view summaryTextView e seta ela como visivel
+     * @param userName nome do usuario, pego pelo metodo checkForUsername()
+     * @param adt ArrayList de adicionais do café
+     * @param b se tudo ocorreu corretamente, o valor deve ser verdadeiro, caso contrario,
+     *         nada é mostrado.
+     * @param i Quantidade de copos de café
+     * @param d Valor de cada café
+     */
+    private void showSummary(String userName,ArrayList<String> adt, boolean b, int i, double d) {
         TextView summaryTextView = findViewById(R.id.summaryTextView);
         String textToShow = "";
+        double addtionalPrice = 0;
         if (b) {
-            textToShow = "Name: Username Here" + "\nQuantity: " + i;
+            textToShow = "Name: "+ userName + "\nQuantity: " + i;
             if(adt.size() > 0) {
                 textToShow += "\nAditionals:";
                 for (String adtional : adt) {
+                    addtionalPrice += 1.50;
                     textToShow += "\n\t" + adtional;
                 }
             }
-            textToShow += "\nTotal: " + NumberFormat.getCurrencyInstance().format(i * d);
+            textToShow += "\nTotal: " + NumberFormat.getCurrencyInstance().format((i * d)+addtionalPrice);
         }else {
             summaryTextView.setText(textToShow);
         }
@@ -150,6 +172,8 @@ public class MainActivity extends AppCompatActivity {
         TextView priceTxtView = findViewById(R.id.price_text_view);
         int qntOfCoffee = checkQntView();
         double coffeePrice = getCoffeePrice(checkCup());
+        ArrayList<String> arrayList = checkAdditional();
+        coffeePrice += (arrayList.size() * 1.50 );
         String textToShow = NumberFormat.getCurrencyInstance().format(qntOfCoffee * coffeePrice);
         priceTxtView.setText(textToShow);
     }
