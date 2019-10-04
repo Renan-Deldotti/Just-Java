@@ -69,6 +69,10 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
+    /**
+     * faz o pedido
+     * @param view recebe a view que chamou o metodo
+     */
     public void submitOrder(View view) {
         int qntOfCoffee = checkQntView();
         double coffeePrice = getCoffeePrice(checkCup());
@@ -94,11 +98,19 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, textToShow, Toast.LENGTH_LONG).show();
     }
 
+    /**
+     * Encontra o nome do usuario do app
+     * @return uma String contendo o nome
+     */
     private String checkForUsername() {
         EditText usernameTxtView = findViewById(R.id.usernameTextView);
         return usernameTxtView.getText().toString();
     }
 
+    /**
+     * Verifica por adicionais na bebida
+     * @return retorna um ArrayList de adicionais
+     */
     private ArrayList<String> checkAdditional() {
         ArrayList<String> adts = new ArrayList<>();
         CheckBox adt = findViewById(R.id.whippedCream);
@@ -140,6 +152,11 @@ public class MainActivity extends AppCompatActivity {
         summaryTextView.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * Checa a quantidade de café
+     * @return -1 se a quantidade de cafés for qualquer coisa senão um numero maior ou igual a 0
+     * ou retorna o numero de pedidos de café
+     */
     private int checkQntView() {
         TextView quantityTextView = findViewById(R.id.quantity_text_view);
         if (Integer.parseInt(quantityTextView.getText().toString().trim()) >= 0) {
@@ -148,6 +165,12 @@ public class MainActivity extends AppCompatActivity {
         return -1;
     }
 
+    /**
+     * checa o tipo do copo
+     * @return 1 se - O botao 1 foi clicado
+     * 2 se - o botao 2 foi clicado
+     * 0 se algo deu errado ou algum erro ocorreu
+     */
     private short checkCup() {
         RadioGroup cupBtn = findViewById(R.id.cupButtons);
         switch (cupBtn.getCheckedRadioButtonId()) {
@@ -160,6 +183,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Retorna o valor do café de acordo com o copo (papel ou normal)
+     * @param s definiçao do tipo do copo
+     * @return o valor do preço
+     */
     private double getCoffeePrice(short s) {
         double price;
         if (s == 1) price = 5.00;
@@ -168,6 +196,9 @@ public class MainActivity extends AppCompatActivity {
         return price;
     }
 
+    /**
+     * Mostra o preço atualizado na view price_text_view
+     */
     private void displayPrice() {
         TextView priceTxtView = findViewById(R.id.price_text_view);
         int qntOfCoffee = checkQntView();
@@ -178,10 +209,18 @@ public class MainActivity extends AppCompatActivity {
         priceTxtView.setText(textToShow);
     }
 
+    /**
+     * acão recebida pelo botao e chama outro metodo
+     * @param view
+     */
     public void displayPrice(View view) {
         displayPrice();
     }
 
+    /**
+     * aumenta a quantidade
+     * @param view botao clicado
+     */
     public void increaseQuantity(View view) {
         TextView quantityTextView = findViewById(R.id.quantity_text_view);
         if (checkQntView() != -1) {
@@ -192,6 +231,10 @@ public class MainActivity extends AppCompatActivity {
         displayPrice();
     }
 
+    /**
+     * Diminui a quantidade
+     * @param view recebe o botão que foi clicado
+     */
     public void decreaseQuantity(View view) {
         TextView quantityTextView = findViewById(R.id.quantity_text_view);
         if (checkQntView() != -1 && checkQntView() > 0) {
