@@ -2,6 +2,8 @@ package com.example.justjava2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.SpannableString;
@@ -98,6 +100,16 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, textToShow, Toast.LENGTH_LONG).show();
     }
 
+    private void sendByEmail(String text) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.setPackage("com.whatsapp");
+        intent.putExtra(Intent.EXTRA_TEXT, text);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
     /**
      * Encontra o nome do usuario do app
      * @return uma String contendo o nome
@@ -123,7 +135,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Cria o summario e insere o valor na view summaryTextView e seta ela como visivel
+     * Cria o summario e insere o valor na view summaryTextView, seta ela como visivel e
+     * chama o método que cria uma intent e envia o pedido por whatsapp
      * @param userName nome do usuario, pego pelo metodo checkForUsername()
      * @param adt ArrayList de adicionais do café
      * @param b se tudo ocorreu corretamente, o valor deve ser verdadeiro, caso contrario,
@@ -145,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             textToShow += "\nTotal: " + NumberFormat.getCurrencyInstance().format((i * d)+addtionalPrice);
+            //sendByEmail(textToShow + "\nYour order is beeing prepared.\nThank you.");
         }else {
             summaryTextView.setText(textToShow);
         }
